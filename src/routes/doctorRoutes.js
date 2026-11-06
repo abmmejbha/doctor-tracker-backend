@@ -8,6 +8,8 @@ const {
   getSpecializations,
   getDoctor,
 } = require('../controllers/doctorController');
+const { getDoctorPatients, addPatientToDoctor } = require('../controllers/patientController');
+const { patientRules } = require('./patientRoutes');
 
 const doctorRules = [
   body('name').trim().notEmpty().withMessage('Name is required'),
@@ -22,5 +24,10 @@ router.use(protect);
 router.get('/specializations', getSpecializations);
 router.route('/').get(getDoctors).post(doctorRules, validate, createDoctor);
 router.get('/:id', getDoctor);
+
+router
+  .route('/:id/patients')
+  .get(getDoctorPatients)
+  .post(patientRules, validate, addPatientToDoctor);
 
 module.exports = router;
