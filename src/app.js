@@ -14,6 +14,8 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/doctors', require('./routes/doctorRoutes'));
 app.use('/api/patients', require('./routes/patientRoutes').router);
+app.use('/api/dashboard', require('./routes/dashboardRoutes'));
+
 app.use(require('./middleware/errorHandler'));
 
 module.exports = app;
